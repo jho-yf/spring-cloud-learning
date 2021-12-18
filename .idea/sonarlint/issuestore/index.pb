@@ -110,8 +110,6 @@ U
 :
 
 sql/db.sql,1\4\144f09c2870333b9c71c066028db5b5c6da46bbc
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 ù
 mcloud-consumer-feign-hystrix-order-80/src/main/java/cn/jho/springcloud/service/feign/PaymentFeignService.java,f\9\f9492fd34df940dff1b10c6450a3288ddcc93993
 ©
