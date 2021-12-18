@@ -2,3 +2,6 @@
 /spring-cloud-compose/mysql/data/
 /spring-cloud-compose/zookeeper/data/
 /spring-cloud-compose/zookeeper/logs/
+**/target
+/.idea/
+*.iml
