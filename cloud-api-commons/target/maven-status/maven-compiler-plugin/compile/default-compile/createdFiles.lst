@@ -1,0 +1,6 @@
+cn\jho\springcloud\entities\CommonResult.class
+cn\jho\springcloud\entities\Payment.class
+cn\jho\springcloud\entities\enums\ReturnCode.class
+cn\jho\springcloud\exceptions\GlobalRuntimeException.class
+cn\jho\springcloud\handlers\IgnoreResponseAdvice.class
+cn\jho\springcloud\handlers\ResponseHandler.class

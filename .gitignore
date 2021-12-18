@@ -1,0 +1,4 @@
+/spring-cloud-compose/consul/data/
+/spring-cloud-compose/mysql/data/
+/spring-cloud-compose/zookeeper/data/
+/spring-cloud-compose/zookeeper/logs/

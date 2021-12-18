@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: "mysql:5.7"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: spring-cloud-learning
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_ROOT_HOST: "%"
+      TZ: Asia/Shanghai
+    volumes:
+      - "./mysql/data:/var/lib/mysql"
+      - "./mysql/config:/etc/mysql/conf.d"
+    restart: always
+
+  zookeeper:
+    image: zookeeper
+    ports:
+      - "2181:2181"
+      - "8080:8080"
+    volumes:
+      - "./zookeeper/data:/data"
+      - "./zookeeper/zoo.cfg:/conf/zoo.cfg"
+      - "./zookeeper/logs:/datalog"
+    restart: always
+
+  consul:
+    image: consul
+    ports:
+      - "8500:8500"
+    command: [agent,-server,-ui,-client=0.0.0.0,-bootstrap-expect=1]
+    volumes:
+      - "./consul/data:/consul/data"
+    restart: always
