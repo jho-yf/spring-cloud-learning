@@ -6,16 +6,29 @@ spring:
     name: cloud-gateway
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true                 # 开启从注册中心动态创建路由的功能，利用服务名进行路由
       routes:
         - id: payment_route             # 路由id，没有固定规则但要求唯一，配合服务使用
-          uri: http://localhost:8001    # 匹配后提供服务的路由地址
+#          uri: http://localhost:8001    # 匹配后提供服务的路由地址
+          uri: lb://CLOUD-PAYMENT-SERVICE    # 匹配后提供服务的路由地址
           predicates:
             - Path=/payment/lb/**        # 断言，路径相匹配的进行路由
+#            - After=2021-12-18T17:21:40.154389600+08:00[Asia/Shanghai]    # 路由在指定时间之后生效
+            - Before=2022-12-19T17:21:40.154389600+08:00[Asia/Shanghai]    # 路由在指定时间之前生效
+#            - Between=2021-12-18T17:21:40.154389600+08:00[Asia/Shanghai],2021-12-19T17:21:40.154389600+08:00[Asia/Shanghai]    # 路由在指定时间之前生效
+#            - Cookie=username,jho        # 携带指定cookie生效【curl http://192.168.0.161:9527/payment/lb --cookie "username=jho"】
+#            - Header=X-Request-Id, \d+    # 请求头要有X-Request-Id属性并且为正整数生效 【curl http://192.168.0.161:9527/payment/lb -H "X-Request-Id:123"】
+#            - Host=**.jho.cn,**.yf.cn     # curl http://192.168.0.161:9527/payment/lb -H "Host:a.b.jho.cn"
+#            - Method=GET
+#            - Query=userId, \d+         # 请求参数要携带userId且值为正整数
 
-        - id: payment_route2            # 路由id，没有固定规则但要求唯一，配合服务使用
-          uri: http://localhost:8001    # 匹配后提供服务的路由地址
-          predicates:
-            - Path=/payment/**          # 断言，路径相匹配的进行路由
+#        - id: payment_route2            # 路由id，没有固定规则但要求唯一，配合服务使用
+##          uri: http://localhost:8001    # 匹配后提供服务的路由地址
+#          uri: lb://CLOUD-PAYMENT-SERVICE    # 匹配后提供服务的路由地址
+#          predicates:
+#            - Path=/payment/**          # 断言，路径相匹配的进行路由
 
 eureka:
   instance:
