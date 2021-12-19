@@ -5,3 +5,4 @@
 **/target
 /.idea/
 *.iml
+/spring-cloud-compose/rabbitmq/data/

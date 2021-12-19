@@ -16,6 +16,11 @@ spring:
           strict-host-key-checking: false
           skip-ssl-validation: true
         default-label: master                                     # 默认分支 http://localhost:3344/master/config-test.yml
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 
 eureka:
@@ -33,3 +38,12 @@ eureka:
       # 设置与Eureka Server交互的地址查询服务和注册服务都需要依赖此地址
       #      defaultZone: http://localhost:7001/eureka    # 单机
       defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka  # 集群
+
+# rabbitmq相关配置，暴露bus刷新配置的端点
+# 刷新所有节点 curl -X POST "http://192.168.0.161:3344/actuator/bus-refresh"
+# 刷新指定节点 curl -X POST "http://192.168.0.161:3344/actuator/bus-refresh/cloud-config-client:3355"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'bus-refresh'
