@@ -1,0 +1,35 @@
+server:
+  port: 3344
+
+
+spring:
+  application:
+    name: cloud-config-center     # 注册进Eureka服务器的微服务名
+  cloud:
+    config:
+      server:
+        # 读取指定private key：https://github.com/spring-cloud/spring-cloud-config/issues/1251
+        git:
+          uri: git@github.com:jho-yf/spring-cloud-learning.git    # github仓库地址
+          search-paths: cloud-config
+          ignore-local-ssh-settings: false
+          strict-host-key-checking: false
+          skip-ssl-validation: true
+        default-label: master                                     # 默认分支 http://localhost:3344/master/config-test.yml
+
+
+eureka:
+  instance:
+    instance-id: cloud-config-center-3344
+    # 访问路径显示IP地址
+    prefer-ip-address: true
+  client:
+    # 是否将自己注册进入EurekaServer，默认true
+    register-with-eureka: true
+    # 是否从EurekaServer抓取已有的注册信息，默认true
+    # 单节点无所谓，集群必须设置为true才能配置ribbon使用负载均衡
+    fetch-registry: true
+    service-url:
+      # 设置与Eureka Server交互的地址查询服务和注册服务都需要依赖此地址
+      #      defaultZone: http://localhost:7001/eureka    # 单机
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka  # 集群
