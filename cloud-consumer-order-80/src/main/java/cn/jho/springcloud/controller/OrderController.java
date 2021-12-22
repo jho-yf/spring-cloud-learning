@@ -77,4 +77,9 @@ public class OrderController {
         return restTemplate.getForObject(serviceInstance.getUri() + "/payment/lb", CommonResult.class);
     }
 
+    @GetMapping("/payment/zipkin")
+    public CommonResult paymentZipkin() {
+        return restTemplateWithLB.getForObject(PAYMENT_URL + "/payment/zipkin", CommonResult.class);
+    }
+
 }

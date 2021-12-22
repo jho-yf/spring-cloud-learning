@@ -24,6 +24,12 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
+        <!-- 包含sleuth + zipkin -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+
         <!--<dependency>-->
         <!--    <groupId>org.mybatis.spring.boot</groupId>-->
         <!--    <artifactId>mybatis-spring-boot-starter</artifactId>-->
