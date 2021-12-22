@@ -1,0 +1,39 @@
+server:
+  port: 8801
+
+spring:
+  application:
+    name: cloud-stream-provider
+  cloud:
+    stream:
+      binders:                  # 配置要绑定得rabbitmq的服务信息
+        defaultRabbit:          # 表示定义的名称，用于binging整合
+          type: rabbit          # 消息组件类型
+          environment:          # rabbitmq的相关环境变量
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+      bindings:                           # 服务的整合处理
+        output:                           # 通道名称
+          destination: myExchange         # 表示要使用的Exchange名称定义
+          content-type: application/json  # 设置消息类型
+          binder: defaultRabbit           # 要绑定的消息服务的具体设置
+
+eureka:
+  instance:
+    instance-id: cloud-stream-rabbitmq-provider-8001
+    # 访问路径显示IP地址
+    prefer-ip-address: true
+  client:
+    # 是否将自己注册进入EurekaServer，默认true
+    register-with-eureka: true
+    # 是否从EurekaServer抓取已有的注册信息，默认true
+    # 单节点无所谓，集群必须设置为true才能配置ribbon使用负载均衡
+    fetch-registry: true
+    service-url:
+      # 设置与Eureka Server交互的地址查询服务和注册服务都需要依赖此地址
+      #      defaultZone: http://localhost:7001/eureka    # 单机
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka  # 集群
