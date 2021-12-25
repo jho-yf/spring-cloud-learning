@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "service-url.nacos-payment-service",
+      "type": "java.lang.String",
+      "description": "微服务名称."
+  }
+] }
