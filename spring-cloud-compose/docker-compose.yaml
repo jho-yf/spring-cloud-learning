@@ -65,3 +65,12 @@ services:
       - mysql
     restart: always
 
+  sentinel-dashboard:
+    image: bladex/sentinel-dashboard
+    environment:
+      JAVA_OPTS: "-Dserver.port=8858 -Dcsp.sentinel.dashboard.server=localhost:8858 -Dproject.name=sentinel-dashboard"
+    ports:
+      - "8858:8858"
+    volumes:
+      - ./sentinel/logs:/root/logs
+    restart: always
