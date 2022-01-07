@@ -7,3 +7,4 @@
 *.iml
 /spring-cloud-compose/rabbitmq/data/
 /spring-cloud-compose/nacos/logs/
+/spring-cloud-compose/sentinel/logs/
