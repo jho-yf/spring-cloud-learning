@@ -1,5 +1,8 @@
 package cn.jho.springcloud.alibaba.controller;
 
+import cn.jho.springcloud.alibaba.handle.CustomBlockHandler;
+import cn.jho.springcloud.entities.CommonResult;
+import cn.jho.springcloud.entities.Payment;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +46,34 @@ public class FlowLimitController {
      */
     public String dealHostKey(String name, Integer age, BlockException exception) {
         return "【blockHandler】name=" + name + ",age=" + age + ",exception=" + exception;
+    }
+
+    @GetMapping("/resource")
+    @SentinelResource(value = "resource", blockHandler = "handleException")
+    public CommonResult<Payment> byResource() {
+        return new CommonResult<>(200, "【byResource】按资源名称限流测试OK",
+                new Payment(166L, "serial166"));
+    }
+
+    public CommonResult<Payment> handleException(BlockException exception) {
+        return new CommonResult<>(444,
+                "【CommonResult】资源不可用\t" + exception.getClass().getCanonicalName());
+    }
+
+    @GetMapping("/url")
+    @SentinelResource(value = "url")
+    public CommonResult<Payment> byUrl() {
+        return new CommonResult<>(200, "【byUrl】按url限流测试OK",
+                new Payment(166L, "serial166"));
+    }
+
+    @GetMapping("/global-block-handler")
+    @SentinelResource(value = "global-block-handler",
+            blockHandlerClass = CustomBlockHandler.class,
+            blockHandler = "handlerException1")
+    public CommonResult<Payment> testGlobalBlockHandler() {
+        return new CommonResult<>(200, "【testGlobalBlockHandler】测试全局自定义异常OK",
+                new Payment(166L, "serial166"));
     }
 
 }
