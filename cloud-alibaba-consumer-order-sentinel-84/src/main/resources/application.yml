@@ -18,3 +18,8 @@ spring:
 # 消费者将要去服务的payment服务的url
 payment-service:
   nacos-user-service: http://cloud-alibaba-provider-payment-sentinel
+
+# 激活sentinel对Feign的支持
+feign:
+  sentinel:
+    enabled: true

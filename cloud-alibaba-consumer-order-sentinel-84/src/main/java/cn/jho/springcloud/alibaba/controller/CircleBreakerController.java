@@ -1,5 +1,6 @@
 package cn.jho.springcloud.alibaba.controller;
 
+import cn.jho.springcloud.alibaba.feign.PaymentFeignClient;
 import cn.jho.springcloud.entities.CommonResult;
 import cn.jho.springcloud.entities.Payment;
 import cn.jho.springcloud.exceptions.GlobalRuntimeException;
@@ -27,8 +28,12 @@ public class CircleBreakerController {
 
     private final RestTemplate restTemplate;
 
-    public CircleBreakerController(RestTemplate restTemplate) {
+    private final PaymentFeignClient paymentFeignClient;
+
+    public CircleBreakerController(RestTemplate restTemplate, PaymentFeignClient paymentFeignClient) {
         this.restTemplate = restTemplate;
+        this.paymentFeignClient = paymentFeignClient;
+
     }
 
     @GetMapping("/fallback/{id}")
@@ -55,7 +60,11 @@ public class CircleBreakerController {
 
     public CommonResult<Payment> handleBlockHandler(Long id, BlockException e) {
         return new CommonResult<>(400, "【handleBlockHandler】id=" + id + ",exception=" + e);
+    }
 
+    @GetMapping("/feign/{id}")
+    public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id) {
+        return paymentFeignClient.getPaymentById(id);
     }
 
 }
