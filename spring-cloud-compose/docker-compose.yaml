@@ -87,3 +87,4 @@ services:
     volumes:
       # 因为registry.conf中是nacos配置中心，只需要把registry.conf放到./seata-server/config文件夹中
       - "./seata-server:/root/seata-config"
+    restart: always
