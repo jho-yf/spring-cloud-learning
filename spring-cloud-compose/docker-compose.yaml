@@ -82,7 +82,8 @@ services:
       - "8091:8091"
     environment:
       - SEATA_PORT=8091
-      - SEATA_IP=127.0.0.1
+      # https://github.com/seata/seata/issues/2522
+      - SEATA_IP=${DOCKER_IP}
       - SEATA_CONFIG_NAME=file:/root/seata-config/registry
     volumes:
       # 因为registry.conf中是nacos配置中心，只需要把registry.conf放到./seata-server/config文件夹中
