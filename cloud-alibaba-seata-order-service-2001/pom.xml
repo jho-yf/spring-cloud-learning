@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.jho.springcloud.seata</groupId>
-    <artifactId>cloud-ablibaba-seata-order-service-2001</artifactId>
+    <artifactId>cloud-alibaba-seata-order-service-2001</artifactId>
 
     <dependencies>
         <dependency>
@@ -18,6 +18,23 @@
             <artifactId>cloud-api-commons</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <!-- db -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+        <!-- mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!-- jdbc -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
         <!-- nacos -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -30,9 +47,14 @@
             <exclusions>
                 <exclusion>
                     <groupId>io.seata</groupId>
-                    <artifactId>seata-all</artifactId>
+                    <artifactId>seata-spring-boot-starter</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.seata</groupId>
+            <artifactId>seata-spring-boot-starter</artifactId>
+            <version>1.4.2</version>
         </dependency>
         <dependency>
             <groupId>io.seata</groupId>
