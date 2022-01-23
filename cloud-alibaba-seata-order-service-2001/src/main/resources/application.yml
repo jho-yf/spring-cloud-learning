@@ -36,7 +36,7 @@ spring:
         namespace: "852a6d8c-4a82-4621-9c0d-9b1431401984"
     alibaba:
       seata:
-        tx-service-group: order-service-tx-group
+        tx-service-group: demo-tx-group
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/seata_order
