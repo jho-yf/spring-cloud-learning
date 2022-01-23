@@ -6,6 +6,7 @@ import cn.jho.springcloud.seata.service.OrderService;
 import cn.jho.springcloud.seata.service.feign.AccountService;
 import cn.jho.springcloud.seata.service.feign.StorageService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
      *
      * @param order {@link Order}
      */
+    @GlobalTransactional(name = "demo-create-order", rollbackFor = Exception.class)
     @Override
     public void create(Order order) {
         log.info("【开始】新建订单...");
