@@ -2,7 +2,6 @@ package cn.jho.springcloud.seata.controller;
 
 import cn.jho.springcloud.entities.CommonResult;
 import cn.jho.springcloud.seata.service.StorageService;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2022-01-23 9:05
  */
 @RestController
-@RequestMapping("storage")
+@RequestMapping("/storage")
 public class StorageController {
 
     private final StorageService storageService;
@@ -21,7 +20,7 @@ public class StorageController {
         this.storageService = storageService;
     }
 
-    @PostMapping("/storage/decrease")
+    @PostMapping("/decrease")
     public CommonResult decrease(Long productId, Integer count) {
         storageService.decrease(productId, count);
         return new CommonResult(200, "扣减库存成功");
