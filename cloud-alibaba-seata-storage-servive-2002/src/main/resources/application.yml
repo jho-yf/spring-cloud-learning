@@ -1,0 +1,57 @@
+server:
+  port: 2002
+
+seata:
+  enabled: true
+  enable-auto-data-source-proxy: true
+  application-id: ${spring.application.name}
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: localhost:8848
+      username: nacos
+      password: nacos
+      group: SEATA_GROUP
+      namespace: "852a6d8c-4a82-4621-9c0d-9b1431401984"
+      cluster: default
+  config:
+    type: nacos
+    nacos:
+      server-addr: localhost:8848
+      username: nacos
+      password: nacos
+      group: SEATA_GROUP
+      namespace: "852a6d8c-4a82-4621-9c0d-9b1431401984"
+      data-id: seataServer.properties
+
+
+spring:
+  application:
+    name: cloud-alibaba-seata-storage-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        namespace: "852a6d8c-4a82-4621-9c0d-9b1431401984"
+    alibaba:
+      seata:
+        tx-service-group: demo-tx-group
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seata_storage
+    username: root
+    password: 123456
+
+feign:
+  hystrix:
+    enabled: false
+
+logging:
+  level:
+    io:
+      seata: info
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: cn.jho.springcloud.seata.entity
